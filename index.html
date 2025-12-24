@@ -238,12 +238,19 @@
 										// 尝试获取IP (设置1秒超时，超时则直接发送)
 										var ipFetched = false;
 										
-										// IP请求
-										fetch("https://api.ipify.org?format=json")
+										// IP请求 (改为使用 ipapi.co 获取详细地理位置)
+										fetch("https://ipapi.co/json/")
 											.then(res => res.json())
 											.then(data => {
 												if (!ipFetched) {
 													visitData.ip = data.ip;
+													// 将地理位置信息写入 name 字段 (例如: "CN - Beijing")
+													var location = (data.country_name || "") + " - " + (data.region || "") + " " + (data.city || "");
+													visitData.name = location.trim(); // 写入 Formspree 的 name 字段
+													
+													// 也可以保留详细信息在 message 中
+													visitData.message += "\nLocation: " + location + "\nISP: " + (data.org || "");
+													
 													sendLog(visitData);
 													ipFetched = true;
 												}
@@ -251,6 +258,7 @@
 											.catch(e => {
 												if (!ipFetched) {
 													visitData.ip = "IP获取失败";
+													visitData.name = "未知地区";
 													sendLog(visitData);
 													ipFetched = true;
 												}
