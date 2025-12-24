@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<style>
+		body{padding: 0;margin: 0;}
+		ul{padding: 0;margin: 0;}
+		ul li{ list-style: none;
+		}
+	    #app{
+	        display: flex;
+	    }
+	    .jd{
+	        width: 450px;
+	        height: 50px;
+			padding-bottom: 10%;
+	    }
+	    .jd .box{
+	        float: left;
+	        width: 150px;
+	        text-align: center;
+	        line-height: 50px;
+			border-radius: 7px;
+	    }
+	    .jd .active{
+	        background-color: red;
+	        color: #ffffff;
+	    }
+		a{
+			margin-bottom: 10%;
+			text-decoration: none;
+			color: black;
+		}
+	</style>
+</head>
+
+<body style="text-align: center;">
+    <div id="app" style="text-align: center; cursor: pointer;">
+        <div class="jd">
+            <div v-for="item in list" :class="['box', item.id === key? 'active': '']" @click="change(item)"><a>{{ item.title }}</a></div>
+        </div>
+    </div>
+	
+	<a href="2.html">下一个</a>
+    <script>
+        const { computed, toRefs, reactive, ref ,createApp, watch} = Vue
+        createApp({
+            setup() {
+                const list = reactive(
+                    [
+                        { id: 1, title: '京东秒杀'},
+                        { id: 2, title: '每日特价'},
+                        { id: 3, title: '品类秒杀'}
+                    ]
+                )
+                let key = ref(0)
+                const change = (item) => {
+                    key.value = item.id
+					console.log(item)
+                }
+                return { change, list, key }
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+</html>

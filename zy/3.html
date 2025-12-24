@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<style>
+	body{padding: 0;margin: 0;}
+	ul{padding: 0;margin: 0;}
+    ul li{ list-style: none;
+    }
+	a{
+		margin-bottom: 10%;
+		text-decoration: none;
+		color: black;
+	}
+</style>
+<body>
+
+    <div id="app" style="margin: 0; padding: 0 0 10% 0px;">
+        <ul>
+            <li v-for="(item,index) in list">{{item.title}} <button @click="del(index)">删除</button></li>
+        </ul>
+    </div>
+    <script>
+        const { computed, toRefs, reactive, ref, createApp, watch } = Vue
+        createApp({
+            setup() {
+
+                let list = reactive(
+                    [
+                        { id: 1, title: '京  东' },
+                        { id: 2, title: '淘  宝' },
+                        { id: 3, title: '拼多多' }
+                    ]
+                )
+                const del = (index) => {
+                    list.splice(index, 1)
+					console.log(index)
+                }
+                return { del, list } 
+            }
+        }).mount('#app')
+    </script>
+	<div style="margin: 0 ;padding: 0;text-align: center;">
+		<a href="1.html" style="text-align: center; list-style: none;">返回第一个</a> <a href="1.html" style="text-align: center;">返回第二个</a>
+		<br>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+	<style>
+	    .box{
+	        width: 50%;
+	        height: 30px;
+	        background-color: red;
+	    }
+	    .box .silde {
+	        height: 30px;
+	        border-radius: 0px 30px 30px 0px;
+	        transition: width .2s;
+	    }
+		a{
+			margin-bottom: 10%;
+			text-decoration: none;
+			color: black;
+		}
+	</style>
+</head>
+
+<body style="margin: 0 auto; ;">
+    <div id="app" style="padding: 0 0 10% 0 ">
+        <div class="box">
+            <div class="silde" :style="{ width: changeWidth + '%', backgroundColor: '#e6e6ff' }"></div>
+        </div>
+        <button @click="change(25)">设置25%</button>
+        <button @click="change(50)">设置50%</button>
+        <button @click="change(75)">设置75%</button>
+        <button @click="change(100)">设置100%</button>
+    </div>
+	<div style="margin: 0 ;padding: 0;text-align: center;">
+		<a href="3.html" style="text-align: center;">下一个</a>
+	</div>
+    <script>
+        const { computed, toRefs, reactive, ref ,createApp, watch} = Vue
+        createApp({
+            setup() {
+                let changeWidth = ref(0)
+                const change = width => {
+                    changeWidth.value = width
+					console.log(width)
+                }
+                return { change, changeWidth}
+            }
+        }).mount('#app')
+    </script>
+
+</body>
+</html>
