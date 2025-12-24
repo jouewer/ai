@@ -37,6 +37,24 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // Log visitor information for index page access
+    if (req.method === 'GET' && (req.url === '/' || req.url.startsWith('/index.html') || req.url.startsWith('/?'))) {
+        const timestamp = new Date().toLocaleString();
+        const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        const userAgent = req.headers['user-agent'];
+        const logEntry = `
+[Visitor Access]
+Time: ${timestamp}
+IP: ${clientIp}
+User-Agent: ${userAgent}
+URL: ${req.url}
+--------------------------------------------------
+`;
+        fs.appendFile(LOG_FILE, logEntry, (err) => {
+            if (err) console.error('Error logging visitor:', err);
+        });
+    }
+
     if (req.method === 'POST' && req.url === '/submit') {
         let body = '';
         req.on('data', chunk => {
@@ -46,7 +64,7 @@ const server = http.createServer((req, res) => {
             const formData = querystring.parse(body);
             const timestamp = new Date().toLocaleString();
             const logEntry = `
---------------------------------------------------
+[Form Submission]
 Time: ${timestamp}
 Name: ${formData.name || ''}
 Email: ${formData.email || ''}
