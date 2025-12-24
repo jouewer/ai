@@ -160,7 +160,7 @@
 						    </address>
 						</div>
 						<div class="col-md-6">
-							<form id="contactForm" action="https://formspree.io/f/xpqanoeg" method="POST">
+							<form id="contactForm" action="https://formspree.io/f/mnjaropv" method="POST">
 								<div class="col-md-6">
 									<input type="text" name="name" class="form-control" placeholder="您的姓名" required />
 								</div>
@@ -186,6 +186,19 @@
 							<script>
 								// 访问日志记录功能
 								document.addEventListener('DOMContentLoaded', function() {
+									// 检查访问频率：2分钟冷却时间
+									var lastVisitTime = localStorage.getItem('lastVisitTime');
+									var currentTime = new Date().getTime();
+									var cooldown = 2 * 60 * 1000; // 2分钟
+
+									if (lastVisitTime && (currentTime - parseInt(lastVisitTime) < cooldown)) {
+										console.log("访问日志：距离上次访问不足2分钟，本次跳过记录。");
+										return;
+									}
+									
+									// 更新最后访问时间
+									localStorage.setItem('lastVisitTime', currentTime);
+
 									// 延迟执行
 									setTimeout(function() {
 										var visitData = {
