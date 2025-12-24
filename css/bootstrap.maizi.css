@@ -60,6 +60,10 @@ body{
 	height: 100%;
 	background: rgba(0,0,0,0.7);
 	padding: 90px 0;
+	pointer-events: none;
+}
+.lvjing .row > div {
+	pointer-events: auto;
 }
 #home h1{
 	font-weight: bold;
@@ -114,8 +118,9 @@ body{
 
 /*contact*/
 #contact{
-	background: url(../img/aaa.jpg) no-repeat;
-	background-size: cover;
+	/* background: url(../img/aaa.jpg) no-repeat; */
+	/* background-size: cover; */
+	position: relative;
 	color: #fff;
 	/*height: 500px;*/
 }
