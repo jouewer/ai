@@ -120,7 +120,7 @@
 					<img src="img/009.jpg" class="img-responsive" alt="" />
 				</div>
 				<div class="col-md-6">
-					<h2>新媒体平台</h2>
+					<h2><a href="img/gzh.jpg">新媒体平台</a></h2>
 					<p>就开始了搭街坊螺丝扣搭街坊立刻圣诞节但是开了房间都是刻录机尽快了解</p>
 					<p><span class="glyphicon glyphicon-grain mai-icon"></span>迪斯科飞机开始独立解放螺丝扣搭街坊肯定是链接发来看</p>
 					<p><span class="glyphicon glyphicon-grain mai-icon"></span>看到了时间分厘卡圣诞节离开迪斯科飞机打瞌睡了的方式</p>
@@ -160,7 +160,7 @@
 						    </address>
 						</div>
 						<div class="col-md-6">
-							<form id="contactForm">
+							<form id="contactForm" action="https://formspree.io/f/mnjaropv" method="POST">
 								<div class="col-md-6">
 									<input type="text" name="name" class="form-control" placeholder="您的姓名" required />
 								</div>
@@ -177,25 +177,12 @@
 									<input type="submit" class="form-control" value="提交" />
 								</div>
 							</form>
-							<script>
-								document.getElementById('contactForm').addEventListener('submit', function(e) {
-									e.preventDefault();
-									var formData = $(this).serialize(); // Use jQuery serialize since jQuery is already loaded
-									
-									$.ajax({
-										type: "POST",
-										url: "http://localhost:3000/submit",
-										data: formData,
-										success: function() {
-											alert("提交成功！您的留言已保存。");
-											$('#contactForm')[0].reset();
-										},
-										error: function() {
-											alert("提交失败！请确保后台服务已启动 (运行 node server.js)。");
-										}
-									});
-								});
-							</script>
+							<!-- 
+								注意：在 GitHub Pages 等静态网站上无法直接写入 log.txt 文件。
+								建议使用 Formspree 等第三方服务来接收表单数据。
+								1. 访问 https://formspree.io/ 注册账号并创建表单
+								2. 将上面 form 标签的 action 属性值替换为你获取到的 URL
+							-->
 						</div>
 					</div>
 				</div>
@@ -219,7 +206,7 @@
 		</footer>
 		<!--footer-->
 		
-		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="js/bootstrap.min.js" ></script>
 		<script src="js/jquery.singlePageNav.min.js"></script>
 		<script src="js/wow.min.js"></script>
