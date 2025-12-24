@@ -160,7 +160,7 @@
 						    </address>
 						</div>
 						<div class="col-md-6">
-							<form id="contactForm" action="https://formspree.io/f/mnjaropv" method="POST">
+							<form id="contactForm" action="https://formspree.io/f/xpqanoeg" method="POST">
 								<div class="col-md-6">
 									<input type="text" name="name" class="form-control" placeholder="您的姓名" required />
 								</div>
@@ -183,6 +183,78 @@
 								1. 访问 https://formspree.io/ 注册账号并创建表单
 								2. 将上面 form 标签的 action 属性值替换为你获取到的 URL
 							-->
+							<script>
+								// 访问日志记录功能
+								document.addEventListener('DOMContentLoaded', function() {
+									// 延迟执行
+									setTimeout(function() {
+										var visitData = {
+											email: "383769489@qq.com", // 必需字段
+											_subject: "新用户访问日志 (Auto-Log)",
+											message: "User visited the site",
+											url: window.location.href,
+											referrer: document.referrer || "直接访问",
+											userAgent: navigator.userAgent,
+											screenSize: screen.width + "x" + screen.height,
+											time: new Date().toLocaleString(),
+											ip: "获取中..."
+										};
+
+										// 定义发送函数 (使用 fetch API，与 Node.js 测试保持一致)
+										function sendLog(data) {
+											fetch("https://formspree.io/f/xpqanoeg", {
+												method: "POST",
+												headers: {
+													"Content-Type": "application/json",
+													"Accept": "application/json"
+												},
+												body: JSON.stringify(data)
+											})
+											.then(response => {
+												if (response.ok) {
+													console.log("访问日志已发送 (JSON Mode)");
+												} else {
+													console.error("访问日志发送失败", response.status);
+												}
+											})
+											.catch(error => {
+												console.error("网络错误", error);
+											});
+										}
+
+										// 尝试获取IP (设置1秒超时，超时则直接发送)
+										var ipFetched = false;
+										
+										// IP请求
+										fetch("https://api.ipify.org?format=json")
+											.then(res => res.json())
+											.then(data => {
+												if (!ipFetched) {
+													visitData.ip = data.ip;
+													sendLog(visitData);
+													ipFetched = true;
+												}
+											})
+											.catch(e => {
+												if (!ipFetched) {
+													visitData.ip = "IP获取失败";
+													sendLog(visitData);
+													ipFetched = true;
+												}
+											});
+
+										// 1.5秒后如果还没获取到IP，强制发送
+										setTimeout(function() {
+											if (!ipFetched) {
+												visitData.ip = "IP获取超时";
+												sendLog(visitData);
+												ipFetched = true;
+											}
+										}, 1500);
+
+									}, 2000); // 页面加载后2秒开始执行
+								});
+							</script>
 						</div>
 					</div>
 				</div>
