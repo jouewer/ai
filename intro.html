@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>本站简介 - 李琼渊</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding-top: 80px;
+			}
+			
+			/* Custom Scrollbar */
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #ccc;
+				border-radius: 4px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: #40d2b1;
+			}
+
+			/* Navbar */
+			.navbar-default {
+				background-color: #fff;
+				border-bottom: 1px solid #eee;
+				box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+			}
+			.navbar-default .navbar-brand {
+				color: #333;
+				font-weight: bold;
+				display: flex;
+				align-items: center;
+				padding: 0 15px;
+				height: 70px;
+				font-size: 30px;
+			}
+			.navbar-default .navbar-nav > li > a {
+				color: #333;
+				transition: all 0.3s;
+				height: 70px;
+				line-height: 40px; /* Vertically center text (70 - 20 padding)/2 approx, or just use line-height */
+				display: flex;
+				align-items: center;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.navbar-toggle {
+				margin-top: 18px;
+			}
+			.navbar-default .navbar-nav > li > a:hover,
+			.navbar-default .navbar-nav > .active > a {
+				color: #40d2b1;
+				background-color: transparent;
+			}
+			
+			h1.page-title {
+				text-align: center;
+				color: #333;
+				margin: 50px 0 60px;
+				font-size: 36px;
+				text-transform: uppercase;
+				letter-spacing: 5px;
+			}
+			
+			.tech-card {
+				background: #fff;
+				border: 1px solid #eee;
+				padding: 30px;
+				margin-bottom: 30px;
+				border-radius: 4px;
+				transition: all 0.3s ease;
+				position: relative;
+				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+			}
+			.tech-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+				border-color: #40d2b1;
+			}
+			.tech-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 30px;
+				height: 30px;
+				border-top: 2px solid #40d2b1;
+				border-left: 2px solid #40d2b1;
+				opacity: 0.5;
+				transition: all 0.3s;
+			}
+			.tech-card:hover::before {
+				width: 100%;
+				height: 100%;
+				opacity: 1;
+			}
+			
+			h3.section-title {
+				color: #333;
+				margin-top: 0;
+				margin-bottom: 20px;
+				font-size: 20px;
+				border-left: 4px solid #40d2b1;
+				padding-left: 15px;
+			}
+			
+			p.tech-text {
+				line-height: 1.8;
+				text-align: justify;
+				font-size: 15px;
+				color: #666;
+			}
+
+			/* Footer */
+			footer {
+				background-color: #f8f8f8;
+				border-top: 1px solid #eee;
+				color: #666;
+				padding: 30px 0;
+				margin-top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Scanline Effect -->
+		<div class="scanline-effect"></div>
+
+		<!--导航-->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					</button>
+					<a href="index.html" class="navbar-brand">
+						<img src="img/logo.png" alt="logo" width="30" />
+						<span style="margin-left: 10px; font-size: 16px;">李琼渊</span>
+					</a>
+				</div>
+				
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html#home">首页</a></li>
+						<li><a href="about.html" class="external">作者简介</a></li>
+						<li><a href="index.html#html5">Web前端</a></li>
+						<li><a href="index.html#bootstrap">公众号</a></li>
+						<li class="active"><a href="intro.html">本站简介</a></li>
+						<li><a href="index.html#html5">人工智能</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--导航--->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-title wow fadeInDown">平台核心理念</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<!-- Introduction -->
+					<div class="tech-card wow fadeInUp" data-wow-delay="0.1s">
+						<h3 class="section-title">定位与愿景</h3>
+						<p class="tech-text">
+							该网站是一个以技术分享与人工智能思考为核心内容的技术型平台，主要围绕人工智能领域的技术实践、前沿趋势分析以及高实用价值工具的整理与分享展开。网站致力于将分散的技术知识、工程经验与行业观察进行系统化整理，为对人工智能与计算机技术感兴趣的读者提供具有参考价值的内容。
+						</p>
+					</div>
+
+					<!-- Technical Content -->
+					<div class="tech-card wow fadeInUp" data-wow-delay="0.2s">
+						<h3 class="section-title">硬核技术实践</h3>
+						<p class="tech-text">
+							在技术内容方面，网站重点关注人工智能、大模型、深度学习及模型推理等方向，涵盖模型结构设计、训练思路、工程实现细节以及实际部署过程中常见问题的分析与总结。相关内容并非简单复述技术文档或概念定义，而是基于真实开发场景，对技术方案的适用条件、优劣取舍及工程可行性进行深入探讨，强调技术在实际应用中的稳定性、可扩展性与可落地性。
+						</p>
+					</div>
+
+					<!-- AI Trends -->
+					<div class="tech-card wow fadeInUp" data-wow-delay="0.3s">
+						<h3 class="section-title">深度趋势洞察</h3>
+						<p class="tech-text">
+							在人工智能观点与趋势分析板块，网站持续关注当前行业内的热点技术与发展动向，包括大模型演进路径、推理效率与算力成本、边缘智能应用场景以及人工智能在不同领域中的应用边界。相关分析更侧重技术与工程视角，对热门概念进行理性拆解，避免过度渲染技术能力或盲目追随行业话题，力求为读者提供更加冷静、客观且具有长期参考价值的认知框架。
+						</p>
+					</div>
+
+					<!-- Tools -->
+					<div class="tech-card wow fadeInUp" data-wow-delay="0.4s">
+						<h3 class="section-title">工具链与资源</h3>
+						<p class="tech-text">
+							网站同时设有实用工具与资源整理板块，内容覆盖开发效率工具、人工智能相关开源项目、模型训练与推理部署工具链，以及在实际工作中具有明确应用价值的软件与服务。该板块以实用性为核心导向，围绕工具的使用场景、功能特点与适用人群进行说明，帮助读者在繁杂的工具生态中快速筛选出真正具有价值的资源，降低学习与试错成本。
+						</p>
+					</div>
+
+					<!-- Presentation -->
+					<div class="tech-card wow fadeInUp" data-wow-delay="0.5s">
+						<h3 class="section-title">内容呈现形式</h3>
+						<p class="tech-text">
+							在内容呈现形式上，网站根据主题特点灵活采用技术教程、经验总结、观点分析、工具指南等多种写作方式。部分内容偏重技术细节，适合具备一定基础的技术人员深入阅读；部分内容则更强调整体思路与认知结构，适合希望系统了解人工智能技术体系的读者。通过不同层次内容的组合，网站在技术深度与阅读友好性之间保持相对平衡。
+						</p>
+					</div>
+
+					<!-- Evolution -->
+					<div class="tech-card wow fadeInUp" data-wow-delay="0.6s">
+						<h3 class="section-title">动态知识体系</h3>
+						<p class="tech-text">
+							从整体定位来看，该网站不仅是技术知识的展示平台，也是技术实践与思考过程的长期记录载体。随着人工智能技术与工程方法的不断演进，网站内容将持续更新与完善，对已有观点进行修正和补充，形成动态发展的知识体系。这种持续迭代的内容机制，有助于真实反映技术发展过程中的变化与取舍。
+						</p>
+					</div>
+
+					<!-- Future -->
+					<div class="tech-card wow fadeInUp" data-wow-delay="0.7s">
+						<h3 class="section-title">未来展望</h3>
+						<p class="tech-text">
+							未来，网站将继续围绕人工智能技术应用与工程实践进行内容拓展，逐步形成更具系统性的专题模块，覆盖从基础原理到实际落地的完整技术链路。通过持续输出高质量内容，网站希望为技术人员、研究者以及人工智能爱好者提供一个稳定、可信、具有实践价值的技术交流与学习平台。
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--footer-->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12" style="text-align: center; padding: 20px;">
+						<p>
+							本站版权所有 | 域名备案信息: 桂ICP备19010893号 
+							<img src="img/备案图标.png"  style="width: 16px;height: 16px;"/> 
+							桂公网安备 30157363479708381号
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--footer-->
+		
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="js/bootstrap.min.js" ></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+			
+			$(function(){
+				/*小屏幕导航点击关闭菜单*/
+				$('.navbar-collapse a').click(function(){
+					$('.navbar-collapse').collapse('hide');
+				});
+			});
+		</script>
+	</body>
+</html>
