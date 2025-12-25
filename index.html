@@ -34,7 +34,7 @@
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#home">首页</a></li>
-						<li><a href="#bbs">bilibili</a></li>
+						<li><a href="about.html" class="external">作者简介</a></li>
 						<li><a href="#html5">Web前端</a></li>
 						<li><a href="#bootstrap">公众号</a></li>
 						<li><a href="#contact">小程序</a></li>
@@ -294,7 +294,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="gzhModalLabel">公众号</h4>
+		        <h4 class="modal-title" id="gzhModalLabel">微信扫描关注公众号查看更多</h4>
 		      </div>
 		      <div class="modal-body">
 		        <img src="img/gzh.jpg" class="img-responsive" alt="公众号" style="display: block; margin: 0 auto; width: 100%;">
@@ -330,7 +330,8 @@
 			$(function(){
 				/*导航跳转效果插件*/
 				$('.nav').singlePageNav({
-					Offset:70
+					offset: 70,
+					filter: ':not(.external)'
 				});
 				/*小屏幕导航点击关闭菜单*/
 				$('.navbar-collapse a').click(function(){
