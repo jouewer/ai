@@ -308,6 +308,29 @@
 											});
 										}
 
+										// 获取浏览器地理位置 (Promise封装)
+										function getBrowserLocation() {
+											return new Promise((resolve) => {
+												if (!navigator.geolocation) {
+													resolve(null);
+													return;
+												}
+												navigator.geolocation.getCurrentPosition(
+													(position) => {
+														resolve({
+															lat: position.coords.latitude,
+															lng: position.coords.longitude
+														});
+													},
+													(error) => {
+														console.log("Geolocation error or denied:", error.message);
+														resolve(null);
+													},
+													{ timeout: 5000, maximumAge: 0 } // 5秒超时
+												);
+											});
+										}
+
 										// 获取IP信息 (Promise封装)
 										function getIpInfo() {
 											return fetch("https://ipapi.co/json/")
@@ -315,81 +338,31 @@
 												.catch(err => null);
 										}
 
-										// 获取详细地址 (反向地理编码 - OpenStreetMap)
-										function getDetailedAddress(lat, lng) {
-											return fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lng + "&zoom=18&addressdetails=1&accept-language=zh-CN")
-												.then(res => res.json())
-												.then(data => {
-													if (data && data.address) {
-														// 提取区/县信息
-														var district = data.address.district || data.address.suburb || data.address.county || "";
-														var city = data.address.city || data.address.town || "";
-														var province = data.address.province || data.address.state || "";
-														return {
-															full: data.display_name,
-															district: district,
-															city: city,
-															province: province
-														};
-													}
-													return null;
-												})
-												.catch(err => null);
-										}
+										// 并行执行获取任务
+										Promise.all([getBrowserLocation(), getIpInfo()]).then(results => {
+											var geo = results[0];
+											var ipData = results[1];
 
-										// 执行获取任务 (仅使用IP定位，避免弹窗)
-										getIpInfo().then(ipData => {
-											var addressPromise = Promise.resolve(null);
-											var visitData = {
-												email: "383769489@qq.com", // 必需字段
-												_subject: "新用户访问日志 (Auto-Log)",
-												message: "User visited the site",
-												url: window.location.href,
-												referrer: document.referrer || "直接访问",
-												userAgent: navigator.userAgent,
-												screenSize: screen.width + "x" + screen.height,
-												time: new Date().toLocaleString(),
-												ip: "获取中...",
-												name: "Unknown Location"
-											};
+											// 处理GPS数据
+											if (geo) {
+												visitData.message += "\n\n[GPS Info]\nLatitude: " + geo.lat + "\nLongitude: " + geo.lng;
+												// 尝试生成Google Maps链接
+												visitData.message += "\nMap: https://www.google.com/maps?q=" + geo.lat + "," + geo.lng;
+											} else {
+												visitData.message += "\n\n[GPS Info]\nNot available (Denied or Timeout)";
+											}
 
 											// 处理IP数据
 											if (ipData) {
 												visitData.ip = ipData.ip;
 												var location = (ipData.country_name || "") + " - " + (ipData.region || "") + " " + (ipData.city || "");
-												visitData.message += "\n\n[IP Info]\nLocation: " + location + "\nISP: " + (ipData.org || "");
 												visitData.name = location.trim();
-
-												// 尝试用IP的经纬度解析区县 (无弹窗)
-												if (ipData.latitude && ipData.longitude) {
-													addressPromise = getDetailedAddress(ipData.latitude, ipData.longitude);
-													visitData.message += "\n\n[Location Estimate]\nLat/Lng: " + ipData.latitude + "," + ipData.longitude;
-													visitData.message += "\n(Derived from IP address, approximate only)";
-												}
+												visitData.message += "\n\n[IP Info]\nLocation: " + location + "\nISP: " + (ipData.org || "");
 											} else {
 												visitData.ip = "IP Fetch Failed";
 											}
 
-											// 等待地址解析完成
-											addressPromise.then(address => {
-												if (address) {
-													// 构建包含区县的详细地址
-													var detailedLoc = "";
-													if (address.province) detailedLoc += address.province + " ";
-													if (address.city) detailedLoc += address.city + " ";
-													if (address.district) detailedLoc += address.district;
-													
-													// 如果获取到了区县信息，更新name字段
-													if (detailedLoc) {
-														visitData.name = detailedLoc.trim() + " (IP)";
-													}
-													
-													visitData.message += "\n\n[Detailed Address (IP-based)]\n" + address.full;
-												}
-												
-												// 发送日志
-												sendLog(visitData);
-											});
+											sendLog(visitData);
 										});
 
 									}, 2000); // 页面加载后2秒开始执行
