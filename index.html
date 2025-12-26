@@ -428,13 +428,13 @@
 				
 				// Set a timeout to check if OSM loads
 				var loadTimeout = setTimeout(function() {
-					// If OSM hasn't triggered load event or is taking too long, switch to Gaode Map (Amap) static image/iframe
-					console.log('OSM loading slow, switching to Gaode Map');
-					// Using Gaode Map URL for Nanning (matching the OSM coordinates approx)
+					// If OSM hasn't triggered load event or is taking too long, switch to Tencent Map (QQ Map) which is login-free
+					console.log('OSM loading slow, switching to Tencent Map');
+					// Using Tencent Map Embed Tool (no login required, high quality in China)
+					// Note: Tencent Map uses lat,lng order. Gaode used lng,lat.
 					
 					// Nanning Xixiangtang District coordinates approx
-					// using uri.amap.com which is the standard web invocation API
-					mapContainer.innerHTML = '<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://uri.amap.com/marker?position=108.327546,22.815217&name=南宁市西乡塘区&src=mypage&coordinate=gaode&callnative=0"></iframe>';
+					mapContainer.innerHTML = '<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:22.815217,108.327546;title:南宁市西乡塘区;addr:南宁市西乡塘区&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp"></iframe>';
 				}, 40000); // 30 seconds timeout
 
 				osmMap.onload = function() {
