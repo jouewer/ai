@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.maizi.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>人工智能开发 - 技术详情</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding-top: 80px;
+			}
+			
+			/* Custom Scrollbar */
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #ccc;
+				border-radius: 4px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: #40d2b1;
+			}
+			
+			.page-header {
+				border-bottom: 1px solid #eee;
+				margin: 40px 0 20px;
+				padding-bottom: 9px;
+			}
+			
+			.article-item {
+				margin-bottom: 40px;
+				padding-bottom: 30px;
+				border-bottom: 1px solid #f5f5f5;
+			}
+			.article-title {
+				font-size: 24px;
+				margin-bottom: 15px;
+				color: #333;
+				font-weight: bold;
+			}
+			.article-meta {
+				color: #999;
+				font-size: 12px;
+				margin-bottom: 15px;
+			}
+			.article-content {
+				color: #666;
+				line-height: 1.8;
+				font-size: 15px;
+			}
+			
+			.pagination > .active > a, 
+			.pagination > .active > span, 
+			.pagination > .active > a:hover, 
+			.pagination > .active > span:hover, 
+			.pagination > .active > a:focus, 
+			.pagination > .active > span:focus {
+				background-color: #40d2b1;
+				border-color: #40d2b1;
+			}
+			
+			.pagination > li > a, 
+			.pagination > li > span {
+				color: #333;
+			}
+			
+			footer {
+				background-color: #f8f8f8;
+				padding: 30px 0;
+				margin-top: 50px;
+				border-top: 1px solid #eee;
+				text-align: center;
+				color: #777;
+			}
+		</style>
+	</head>
+	<body>
+		<!--navbar-->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<!--小屏幕导航按钮和logo-->
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+				</button>
+				<a href="index.html" class="navbar-brand">
+					<img src="img/logo.png" alt="logo" width="30" />
+					<span style="margin-left: 10px; font-size: 16px;">李琼渊</span>
+				</a>
+				</div>
+				
+				<!--小屏幕导航按钮和logo-->
+				
+				<!--导航 -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html#home">首页</a></li>
+						<li><a href="about.html" class="external">作者简介</a></li>
+						<li><a href="index.html#html5">Web前端</a></li>
+						<li><a href="index.html#bootstrap">公众号</a></li>
+						<li><a href="intro.html" class="external">本站简介</a></li>
+						<li><a href="index.html#html5">人工智能</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--navbar-->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="page-header">
+						<h1>人工智能开发技术 <small>Qwen3 专题</small></h1>
+					</div>
+
+					<!-- Article 1 -->
+					<div class="article-item" id="article1">
+						<h2 class="article-title">1. Qwen3 大模型技术介绍</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-20 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>Qwen3 是通义千问系列的最新一代大语言模型，代表了当前开源大模型领域的顶尖水平。相较于前代产品，Qwen3 在模型架构、参数规模以及多模态处理能力上都进行了深度优化。</p>
+							<p>该模型采用了更高效的 Transformer 架构变体，引入了分组查询注意力（GQA）机制，显著提升了推理速度并降低了显存占用。同时，Qwen3 支持超长上下文窗口，能够处理长达 128k 甚至更长的文本输入，使其在文档分析、长篇写作等任务中表现卓越。</p>
+							<p><a href="qwen3_intro.html" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 2 -->
+					<div class="article-item">
+						<h2 class="article-title">2. 训练数据与训练策略</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-21 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>Qwen3 的强大性能源于其海量且高质量的训练数据。研发团队构建了一个包含数万亿 token 的多语言、多领域数据集，涵盖了代码、数学、科学文献、百科知识等广泛内容。</p>
+							<p>在训练策略上，Qwen3 采用了多阶段预训练与精细化微调相结合的方法。首先进行大规模的自监督预训练，学习语言的通用表征；随后通过指令微调（SFT）和人类反馈强化学习（RLHF），使模型更加符合人类的指令意图，提升了回复的安全性和有用性。特别是在代码生成和数学解题能力上，专门的数据增强策略发挥了关键作用。</p>
+							<p><a href="#" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 3 -->
+					<div class="article-item">
+						<h2 class="article-title">3. 推理能力是 Qwen3 的核心技术亮点之一</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-22 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>推理能力（Reasoning）被视为通向通用人工智能（AGI）的关键一步，也是 Qwen3 最引以为傲的核心技术亮点。Qwen3 在逻辑推理、复杂任务规划以及常识推理方面展现出了惊人的能力。</p>
+							<p>通过引入思维链（Chain-of-Thought, CoT）技术，Qwen3 能够像人类一样将复杂问题拆解为多个步骤逐步求解，从而显著提高了在数学难题和逻辑谜题上的准确率。此外，Qwen3 展现出了强大的“举一反三”能力，能够灵活运用已学知识解决未曾见过的全新问题，标志着大模型从简单的“知识检索”向深度的“逻辑思考”迈进。</p>
+						</div>
+					</div>
+
+					<!-- Pagination -->
+					<nav aria-label="Page navigation" class="text-center">
+						<ul class="pagination">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">6</a></li>
+							<li><a href="#">7</a></li>
+							<li><a href="#">8</a></li>
+							<li><a href="#">9</a></li>
+							<li><a href="#">10</a></li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+			</div>
+		</div>
+
+		<!--footer-->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p>&copy; 2024 李琼渊. All Rights Reserved.</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--footer-->
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+	</body>
+</html>

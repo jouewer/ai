@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>Qwen3 大模型技术介绍</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding: 0;
+				margin: 0;
+				overflow-x: hidden;
+			}
+
+			/* Back Button */
+			.back-btn-container {
+				position: fixed;
+				top: 30px;
+				left: 30px;
+				z-index: 1000;
+			}
+			.btn-back {
+				display: inline-block;
+				padding: 10px 25px;
+				background-color: #fff;
+				color: #40d2b1;
+				border: 2px solid #40d2b1;
+				border-radius: 30px;
+				font-weight: bold;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px rgba(64, 210, 177, 0.2);
+			}
+			.btn-back:hover {
+				background-color: #40d2b1;
+				color: #fff;
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(64, 210, 177, 0.3);
+				text-decoration: none;
+			}
+			.btn-back i {
+				margin-right: 5px;
+			}
+
+			/* Content Container */
+			.content-wrapper {
+				max-width: 900px;
+				margin: 80px auto 100px;
+				padding: 40px;
+				position: relative;
+			}
+			
+			/* Decorative Elements */
+			.bg-decoration {
+				position: fixed;
+				top: 0;
+				right: 0;
+				width: 300px;
+				height: 300px;
+				background: linear-gradient(135deg, rgba(64, 210, 177, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+				border-radius: 0 0 0 100%;
+				z-index: -1;
+			}
+			.bg-decoration-2 {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle at bottom left, rgba(64, 210, 177, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+				z-index: -1;
+			}
+
+			/* Typography */
+			.main-title {
+				font-size: 42px;
+				font-weight: 800;
+				margin-bottom: 50px;
+				color: #2c3e50;
+				position: relative;
+				display: inline-block;
+			}
+			.main-title::after {
+				content: '';
+				position: absolute;
+				bottom: -15px;
+				left: 0;
+				width: 60px;
+				height: 4px;
+				background: #40d2b1;
+				border-radius: 2px;
+			}
+			
+			.article-section {
+				margin-bottom: 30px;
+				line-height: 2;
+				font-size: 18px;
+				color: #555;
+				text-align: justify;
+			}
+			
+			.highlight-box {
+				background: #f9fbfd;
+				border-left: 5px solid #40d2b1;
+				padding: 25px;
+				margin: 40px 0;
+				border-radius: 0 8px 8px 0;
+				font-size: 18px;
+				color: #444;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+			}
+
+			.section-heading {
+				font-size: 24px;
+				font-weight: bold;
+				color: #333;
+				margin-top: 40px;
+				margin-bottom: 20px;
+				display: flex;
+				align-items: center;
+			}
+			.section-heading::before {
+				content: '';
+				display: inline-block;
+				width: 8px;
+				height: 24px;
+				background-color: #40d2b1;
+				margin-right: 15px;
+				border-radius: 4px;
+			}
+
+			/* Animations */
+			.wow {
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Background Elements -->
+		<div class="bg-decoration"></div>
+		<div class="bg-decoration-2"></div>
+
+		<!-- Back Button -->
+		<div class="back-btn-container wow fadeInDown" data-wow-delay="0.2s">
+			<a href="tech.html#article1" class="btn-back">
+				<span class="glyphicon glyphicon-arrow-left"></span> 返回列表
+			</a>
+		</div>
+
+		<div class="container">
+			<div class="content-wrapper">
+				<h1 class="main-title wow fadeInLeft">Qwen3 大模型技术介绍</h1>
+				
+				<div class="article-section wow fadeInUp" data-wow-delay="0.2s">
+					<p>Qwen3 是通义千问（Qwen）系列大语言模型的最新一代版本之一，延续并深化了该系列在通用智能、多语言能力、推理性能与工程可部署性方面的整体技术路线。相较于早期版本，Qwen3 在模型架构设计、训练策略、推理能力以及实际应用适配等多个维度进行了系统性升级，体现出当前大模型技术在“能力提升”与“工程落地”之间的进一步平衡。</p>
+				</div>
+
+				<div class="highlight-box wow fadeInUp" data-wow-delay="0.3s">
+					<strong>核心亮点：</strong> Qwen3 不仅追求参数规模，更注重在模型架构、训练策略和推理效率上的综合突破，是迈向通用人工智能（AGI）的重要一步。
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.4s">
+					<div class="section-heading">模型架构：高效与强表达的平衡</div>
+					<p>在模型架构层面，Qwen3 仍基于 Transformer 体系进行构建，但在参数组织方式、注意力机制与前馈网络结构等方面进行了多项优化。通过对模型深度与宽度的合理配置，Qwen3 在保持较强表达能力的同时，兼顾了推理效率与资源消耗控制。这种设计思路使模型在大规模云端部署与受限算力环境中均具备一定适应能力，为多场景应用提供了结构基础。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.5s">
+					<div class="section-heading">训练策略：多样化与精细化</div>
+					<p>在训练数据与训练策略方面，Qwen3 采用了更加多样化且高质量的数据构成，覆盖通用知识、专业技术内容、多语言文本以及复杂指令样本。通过引入更精细的数据清洗与权重分配机制，模型在通用理解能力与专业领域表现之间实现了更合理的平衡。同时，Qwen3 在预训练阶段与指令微调阶段均引入了更严格的稳定性控制策略，有效降低了模型在长文本生成与复杂推理任务中的不确定性。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.6s">
+					<div class="section-heading">推理能力：逻辑与连贯性的飞跃</div>
+					<p>推理能力是 Qwen3 的核心技术亮点之一。相较于前代模型，Qwen3 在逻辑推理、多步骤问题拆解、数学计算以及代码理解等任务中表现出更强的连贯性与一致性。模型能够更好地维持中间推理过程的上下文关联，减少“跳步”“幻觉”或推理断裂等常见问题。这一能力提升，使 Qwen3 在复杂任务执行、工具调用规划以及智能体系统中具备更高的实用价值。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.7s">
+					<div class="section-heading">多语言与跨领域适应性</div>
+					<p>在多语言与跨领域能力方面，Qwen3 对中文与英文均进行了重点优化，同时兼顾多种其他语言的理解与生成能力。在中文场景下，模型在语义理解、专业术语处理及长文本组织方面具有明显优势，适合用于技术文档生成、知识问答与行业应用支持等任务。在跨领域应用中，Qwen3 能够较好地适应从通用对话到专业技术分析的不同需求，减少模型在领域切换时的性能波动。</p>
+				</div>
+				
+				<div class="article-section wow fadeInUp" data-wow-delay="0.8s">
+					<div class="section-heading">工程部署：灵活高效</div>
+					<p>从工程与部署角度来看，Qwen3 在推理效率与部署灵活性方面进行了系统性优化。模型支持多种精度形式与推理框架，能够与主流推理引擎和加速方案进行适配，满足不同算力条件下的部署需求。这一特性使 Qwen3 不仅适合云端高并发服务，也具备向边缘设备或私有化环境延伸的潜力，为企业级应用提供了更多选择空间。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.9s">
+					<div class="section-heading">安全可控：企业级应用保障</div>
+					<p>在安全性与可控性方面，Qwen3 引入了更加完善的对齐与约束机制，在保证模型生成能力的同时，降低不合理输出和风险内容的产生概率。通过对模型行为进行多层次约束，提升了其在实际业务环境中的可控性和稳定性，这对于将大模型技术引入生产系统具有重要意义。</p>
+				</div>
+
+				<div class="highlight-box wow fadeInUp" data-wow-delay="1.0s" style="border-left-color: #333; background: #f5f5f5;">
+					<p style="margin:0;"><strong>总结：</strong> 总体来看，Qwen3 并非单纯追求参数规模的扩张，而是更加注重能力结构、推理质量与工程可用性的综合提升。其技术路线反映了当前大模型发展从“规模驱动”逐步向“质量驱动”和“应用驱动”转变的趋势。随着相关生态和工具链的不断完善，Qwen3 在智能问答、内容生成、代码辅助、行业智能化等多个方向均具备较为广阔的应用前景。</p>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+	</body>
+</html>
