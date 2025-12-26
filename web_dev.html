@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.maizi.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>Web前端开发 - 技术详情</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding-top: 80px;
+			}
+			
+			/* Custom Scrollbar */
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #ccc;
+				border-radius: 4px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: #40d2b1;
+			}
+			
+			.page-header {
+				border-bottom: 1px solid #eee;
+				margin: 40px 0 20px;
+				padding-bottom: 9px;
+			}
+			
+			.article-item {
+				margin-bottom: 40px;
+				padding-bottom: 30px;
+				border-bottom: 1px solid #f5f5f5;
+			}
+			.article-title {
+				font-size: 24px;
+				margin-bottom: 15px;
+				color: #333;
+				font-weight: bold;
+			}
+			.article-meta {
+				color: #999;
+				font-size: 12px;
+				margin-bottom: 15px;
+			}
+			.article-content {
+				color: #666;
+				line-height: 1.8;
+				font-size: 15px;
+			}
+			
+			.pagination > .active > a, 
+			.pagination > .active > span, 
+			.pagination > .active > a:hover, 
+			.pagination > .active > span:hover, 
+			.pagination > .active > a:focus, 
+			.pagination > .active > span:focus {
+				background-color: #40d2b1;
+				border-color: #40d2b1;
+			}
+			
+			.pagination > li > a, 
+			.pagination > li > span {
+				color: #333;
+			}
+			
+			footer {
+				background-color: #f8f8f8;
+				padding: 30px 0;
+				margin-top: 50px;
+				border-top: 1px solid #eee;
+				text-align: center;
+				color: #777;
+			}
+		</style>
+	</head>
+	<body>
+		<!--navbar-->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<!--小屏幕导航按钮和logo-->
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+				</button>
+				<a href="index.html" class="navbar-brand">
+					<img src="img/logo.png" alt="logo" width="30" />
+					<span style="margin-left: 10px; font-size: 16px;">李琼渊</span>
+				</a>
+				</div>
+				
+				<!--小屏幕导航按钮和logo-->
+				
+				<!--导航 -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html#home">首页</a></li>
+						<li><a href="index.html#html5">人工智能</a></li>
+						<li><a href="index.html#bootstrap">公众号</a></li>
+						<li><a href="web_dev.html">Web前端</a></li>
+						<li><a href="intro.html" class="external">本站简介</a></li>
+						<li><a href="about.html" class="external">作者简介</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--navbar-->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="page-header">
+						<h1>Web前端开发技术 <small>技术专题</small></h1>
+					</div>
+
+					<!-- Article 1 -->
+					<div class="article-item" id="article1">
+						<h2 class="article-title">1. HTML5与CSS3基础</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-20 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>HTML5 是构建现代 Web 应用的基石，引入了语义化标签（如 header, footer, article）、多媒体支持（video, audio）以及强大的 Web API（Canvas, Geolocation）。这些新特性极大地丰富了网页的表现力和交互性。</p>
+							<p>CSS3 则为网页带来了丰富的样式和动画效果。Flexbox 和 Grid 布局彻底改变了页面排版方式，Transition 和 Animation 让元素动效更加流畅，Media Queries 则是实现响应式设计的核心，使网页能够适配各种不同尺寸的设备。</p>
+							<p><a href="html5_css3_intro.html" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 2 -->
+					<div class="article-item">
+						<h2 class="article-title">2. JavaScript ES6+ 新特性</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-21 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>ES6（ECMAScript 2015）是 JavaScript 语言发展史上的里程碑。let/const 块级作用域解决了变量提升带来的困扰，箭头函数简化了函数定义并绑定了词法 this，解构赋值让数据提取变得异常优雅。</p>
+							<p>此外，Promise 和 async/await 的引入，彻底革新了异步编程的模式，告别了回调地狱。Module 模块化机制则让前端代码的组织和管理变得更加规范和高效，为构建大型复杂应用奠定了基础。</p>
+							<p><a href="#" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 3 -->
+					<div class="article-item">
+						<h2 class="article-title">3. 现代前端框架</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-22 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>随着 Web 应用复杂度的提升，现代前端框架（React, Vue, Angular）应运而生。它们基于组件化思想，将 UI 拆分为独立的、可复用的模块，极大提高了开发效率和代码可维护性。</p>
+							<p>虚拟 DOM（Virtual DOM）技术的应用，使得页面更新更加高效；双向数据绑定（Vue）或单向数据流（React）则简化了状态管理。配合 Webpack、Vite 等构建工具，现代前端开发已经形成了一套完整的工程化体系。</p>
+						</div>
+					</div>
+
+					<!-- Pagination -->
+					<nav aria-label="Page navigation" class="text-center">
+						<ul class="pagination">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">6</a></li>
+							<li><a href="#">7</a></li>
+							<li><a href="#">8</a></li>
+							<li><a href="#">9</a></li>
+							<li><a href="#">10</a></li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+			</div>
+		</div>
+
+		<!--footer-->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p>&copy; 2024 李琼渊. All Rights Reserved.</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--footer-->
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+	</body>
+</html>

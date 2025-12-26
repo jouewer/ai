@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.maizi.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>C语言开发技术 - 技术详情</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding-top: 80px;
+			}
+			
+			/* Custom Scrollbar */
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #ccc;
+				border-radius: 4px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: #40d2b1;
+			}
+			
+			.page-header {
+				border-bottom: 1px solid #eee;
+				margin: 40px 0 20px;
+				padding-bottom: 9px;
+			}
+			
+			.article-item {
+				margin-bottom: 40px;
+				padding-bottom: 30px;
+				border-bottom: 1px solid #f5f5f5;
+			}
+			.article-title {
+				font-size: 24px;
+				margin-bottom: 15px;
+				color: #333;
+				font-weight: bold;
+			}
+			.article-meta {
+				color: #999;
+				font-size: 12px;
+				margin-bottom: 15px;
+			}
+			.article-content {
+				color: #666;
+				line-height: 1.8;
+				font-size: 15px;
+			}
+			
+			.pagination > .active > a, 
+			.pagination > .active > span, 
+			.pagination > .active > a:hover, 
+			.pagination > .active > span:hover, 
+			.pagination > .active > a:focus, 
+			.pagination > .active > span:focus {
+				background-color: #40d2b1;
+				border-color: #40d2b1;
+			}
+			
+			.pagination > li > a, 
+			.pagination > li > span {
+				color: #333;
+			}
+			
+			footer {
+				background-color: #f8f8f8;
+				padding: 30px 0;
+				margin-top: 50px;
+				border-top: 1px solid #eee;
+				text-align: center;
+				color: #777;
+			}
+		</style>
+	</head>
+	<body>
+		<!--navbar-->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<!--小屏幕导航按钮和logo-->
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+				</button>
+				<a href="index.html" class="navbar-brand">
+					<img src="img/logo.png" alt="logo" width="30" />
+					<span style="margin-left: 10px; font-size: 16px;">李琼渊</span>
+				</a>
+				</div>
+				
+				<!--小屏幕导航按钮和logo-->
+				
+				<!--导航 -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html#home">首页</a></li>
+						<li><a href="index.html#html5">人工智能</a></li>
+						<li><a href="index.html#bootstrap">公众号</a></li>
+						<li><a href="web_dev.html">Web前端</a></li>
+						<li><a href="intro.html" class="external">本站简介</a></li>
+						<li><a href="about.html" class="external">作者简介</a></li>	
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--navbar-->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="page-header">
+						<h1>C语言开发技术 <small>基础与进阶</small></h1>
+					</div>
+
+					<!-- Article 1 -->
+					<div class="article-item">
+						<h2 class="article-title">1. C语言指针与内存管理</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-20 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>指针是C语言的灵魂，也是最难掌握的部分。它提供了直接操作内存的能力，使得C语言在系统级编程中具有不可替代的地位。深入理解指针的概念、指针算术运算以及多级指针，对于编写高效、健壮的C代码至关重要。</p>
+							<p>内存管理方面，手动分配（malloc/calloc）与释放（free）内存是C程序员的基本功。不当的内存操作会导致内存泄漏、悬垂指针等严重问题，掌握内存生命周期管理是进阶的必经之路。</p>
+							<p><a href="c_pointer_intro.html" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 2 -->
+					<div class="article-item">
+						<h2 class="article-title">2. 结构体与联合体的高级应用</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-21 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>结构体（struct）和联合体（union）是C语言中用于自定义数据类型的重要工具。结构体允许我们将不同类型的数据组合在一起，模拟现实世界中的对象；而联合体则允许在同一块内存空间中存储不同类型的数据，节省内存资源。</p>
+							<p>在嵌入式开发和网络协议解析中，利用结构体位域（Bit-fields）和联合体进行数据包的解析与封装是非常常见的技巧，能够极大提高代码的可读性与维护性。</p>
+							<p><a href="#" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 3 -->
+					<div class="article-item">
+						<h2 class="article-title">3. 预处理器与宏定义的艺术</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-22 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>C语言的预处理器（Preprocessor）在编译之前对代码进行处理，提供了宏定义、条件编译和文件包含等功能。合理使用宏定义可以提高代码的可移植性和灵活性，例如定义常量、编写通用宏函数等。</p>
+							<p>然而，滥用宏也可能导致难以调试的错误和副作用。理解宏展开的机制，掌握`#ifdef`、`#ifndef`等条件编译指令，能够帮助开发者构建跨平台的软件系统，并有效管理代码配置。</p>
+							<p><a href="#" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Pagination -->
+					<nav aria-label="Page navigation" class="text-center">
+						<ul class="pagination">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">6</a></li>
+							<li><a href="#">7</a></li>
+							<li><a href="#">8</a></li>
+							<li><a href="#">9</a></li>
+							<li><a href="#">10</a></li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+			</div>
+		</div>
+
+		<!--footer-->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p>&copy; 2024 李琼渊. All Rights Reserved.</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--footer-->
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+	</body>
+</html>

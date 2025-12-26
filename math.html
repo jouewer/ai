@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.maizi.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>高等数学 - 学习笔记</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding-top: 80px;
+			}
+			
+			/* Custom Scrollbar */
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #ccc;
+				border-radius: 4px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: #40d2b1;
+			}
+			
+			.page-header {
+				border-bottom: 1px solid #eee;
+				margin: 40px 0 20px;
+				padding-bottom: 9px;
+			}
+			
+			.article-item {
+				margin-bottom: 40px;
+				padding-bottom: 30px;
+				border-bottom: 1px solid #f5f5f5;
+			}
+			.article-title {
+				font-size: 24px;
+				margin-bottom: 15px;
+				color: #333;
+				font-weight: bold;
+			}
+			.article-meta {
+				color: #999;
+				font-size: 12px;
+				margin-bottom: 15px;
+			}
+			.article-content {
+				color: #666;
+				line-height: 1.8;
+				font-size: 15px;
+			}
+			
+			.pagination > .active > a, 
+			.pagination > .active > span, 
+			.pagination > .active > a:hover, 
+			.pagination > .active > span:hover, 
+			.pagination > .active > a:focus, 
+			.pagination > .active > span:focus {
+				background-color: #40d2b1;
+				border-color: #40d2b1;
+			}
+			
+			.pagination > li > a, 
+			.pagination > li > span {
+				color: #333;
+			}
+			
+			footer {
+				background-color: #f8f8f8;
+				padding: 30px 0;
+				margin-top: 50px;
+				border-top: 1px solid #eee;
+				text-align: center;
+				color: #777;
+			}
+		</style>
+	</head>
+	<body>
+		<!--navbar-->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<!--小屏幕导航按钮和logo-->
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+					    <span class="icon-bar"></span>
+				</button>
+				<a href="index.html" class="navbar-brand">
+					<img src="img/logo.png" alt="logo" width="30" />
+					<span style="margin-left: 10px; font-size: 16px;">李琼渊</span>
+				</a>
+				</div>
+				
+				<!--小屏幕导航按钮和logo-->
+				
+				<!--导航 -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html#home">首页</a></li>
+						<li><a href="index.html#html5">人工智能</a></li>
+						<li><a href="index.html#bootstrap">公众号</a></li>
+						<li><a href="web_dev.html">Web前端</a></li>
+						<li><a href="intro.html" class="external">本站简介</a></li>
+						<li><a href="about.html" class="external">作者简介</a></li>		
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--navbar-->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="page-header">
+						<h1>高等数学学习 <small>基础与核心</small></h1>
+					</div>
+
+					<!-- Article 1 -->
+					<div class="article-item" id="article1">
+						<h2 class="article-title">1. 微积分基础</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-20 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>微积分（Calculus）是高等数学的基石，主要研究函数的变化率（微分）和累积量（积分）。极限理论是微积分建立的逻辑基础，导数揭示了函数在某一点的瞬时变化规律，而积分则解决了求面积、体积以及物理中的功等问题。</p>
+							<p>牛顿-莱布尼茨公式建立了微分与积分之间的桥梁，使得定积分的计算变得简便。深入理解微积分的基本概念和定理，对于学习物理学、工程学以及深入研究计算机算法（如梯度下降）都至关重要。</p>
+							<p><a href="calculus_intro.html" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 2 -->
+					<div class="article-item">
+						<h2 class="article-title">2. 线性代数核心</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-21 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>线性代数（Linear Algebra）主要研究向量空间（或称线性空间）和线性变换。矩阵作为线性代数的主要工具，不仅用于求解线性方程组，还在计算机图形学、机器学习等领域扮演着核心角色。</p>
+							<p>特征值与特征向量是理解矩阵变换本质的关键，它们揭示了线性变换下的不变量。在人工智能领域，矩阵运算（如卷积、全连接层计算）是深度学习模型推理与训练的基础。</p>
+							<p><a href="#" style="color: #40d2b1; font-weight: bold; text-decoration: none;">点击查看更多 >></a></p>
+						</div>
+					</div>
+
+					<!-- Article 3 -->
+					<div class="article-item">
+						<h2 class="article-title">3. 概率论与数理统计</h2>
+						<div class="article-meta">
+							<span class="glyphicon glyphicon-time"></span> 2024-05-22 &nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user"></span> Admin
+						</div>
+						<div class="article-content">
+							<p>概率论（Probability Theory）研究随机现象的数量规律，数理统计（Mathematical Statistics）则致力于通过样本数据推断总体特征。从基础的概率分布（如正态分布、二项分布）到大数定律和中心极限定理，这些理论构成了现代统计学的框架。</p>
+							<p>在数据科学和人工智能中，概率论是处理不确定性的语言，贝叶斯推断、极大似然估计等方法被广泛应用于模型参数估计和预测分析中。</p>
+						</div>
+					</div>
+
+					<!-- Pagination -->
+					<nav aria-label="Page navigation" class="text-center">
+						<ul class="pagination">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">6</a></li>
+							<li><a href="#">7</a></li>
+							<li><a href="#">8</a></li>
+							<li><a href="#">9</a></li>
+							<li><a href="#">10</a></li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+
+				</div>
+			</div>
+		</div>
+
+		<!--footer-->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p>&copy; 2024 李琼渊. All Rights Reserved.</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--footer-->
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+	</body>
+</html>

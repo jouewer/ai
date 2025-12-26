@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>HTML5与CSS3基础</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding: 0;
+				margin: 0;
+				overflow-x: hidden;
+			}
+
+			/* Back Button */
+			.back-btn-container {
+				position: fixed;
+				top: 30px;
+				left: 30px;
+				z-index: 1000;
+			}
+			.btn-back {
+				display: inline-block;
+				padding: 10px 25px;
+				background-color: #fff;
+				color: #40d2b1;
+				border: 2px solid #40d2b1;
+				border-radius: 30px;
+				font-weight: bold;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px rgba(64, 210, 177, 0.2);
+			}
+			.btn-back:hover {
+				background-color: #40d2b1;
+				color: #fff;
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(64, 210, 177, 0.3);
+				text-decoration: none;
+			}
+			.btn-back i {
+				margin-right: 5px;
+			}
+
+			/* Content Container */
+			.content-wrapper {
+				max-width: 900px;
+				margin: 80px auto 100px;
+				padding: 40px;
+				position: relative;
+			}
+			
+			/* Decorative Elements */
+			.bg-decoration {
+				position: fixed;
+				top: 0;
+				right: 0;
+				width: 300px;
+				height: 300px;
+				background: linear-gradient(135deg, rgba(64, 210, 177, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+				border-radius: 0 0 0 100%;
+				z-index: -1;
+			}
+			.bg-decoration-2 {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle at bottom left, rgba(64, 210, 177, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+				z-index: -1;
+			}
+
+			/* Typography */
+			.main-title {
+				font-size: 42px;
+				font-weight: 800;
+				margin-bottom: 50px;
+				color: #2c3e50;
+				position: relative;
+				display: inline-block;
+			}
+			.main-title::after {
+				content: '';
+				position: absolute;
+				bottom: -15px;
+				left: 0;
+				width: 60px;
+				height: 4px;
+				background: #40d2b1;
+				border-radius: 2px;
+			}
+			
+			.article-section {
+				margin-bottom: 30px;
+				line-height: 2;
+				font-size: 18px;
+				color: #555;
+				text-align: justify;
+			}
+			
+			.highlight-box {
+				background: #f9fbfd;
+				border-left: 5px solid #40d2b1;
+				padding: 25px;
+				margin: 40px 0;
+				border-radius: 0 8px 8px 0;
+				font-size: 18px;
+				color: #444;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+			}
+
+			.section-heading {
+				font-size: 24px;
+				font-weight: bold;
+				color: #333;
+				margin-top: 40px;
+				margin-bottom: 20px;
+				display: flex;
+				align-items: center;
+			}
+			.section-heading::before {
+				content: '';
+				display: inline-block;
+				width: 8px;
+				height: 24px;
+				background-color: #40d2b1;
+				margin-right: 15px;
+				border-radius: 4px;
+			}
+
+			/* Animations */
+			.wow {
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Background Elements -->
+		<div class="bg-decoration"></div>
+		<div class="bg-decoration-2"></div>
+
+		<!-- Back Button -->
+		<div class="back-btn-container wow fadeInDown" data-wow-delay="0.2s">
+			<a href="web_dev.html#article1" class="btn-back">
+				<span class="glyphicon glyphicon-arrow-left"></span> 返回列表
+			</a>
+		</div>
+
+		<div class="container">
+			<div class="content-wrapper">
+				<h1 class="main-title wow fadeInLeft">HTML5与CSS3基础</h1>
+				
+				<div class="article-section wow fadeInUp" data-wow-delay="0.2s">
+					<p>HTML5 和 CSS3 是现代 Web 开发的两大基石，它们彻底改变了网页的构建方式和表现形式。HTML5 引入了语义化标签和强大的 API，使得网页结构更加清晰、功能更加丰富；CSS3 则带来了丰富的样式选择器、动画效果和布局模型，让网页设计充满了无限可能。</p>
+				</div>
+
+				<div class="highlight-box wow fadeInUp" data-wow-delay="0.3s">
+					<strong>核心价值：</strong> 掌握 HTML5 和 CSS3，不仅是成为前端开发者的第一步，更是构建高性能、可访问性强且用户体验优秀的 Web 应用的关键。
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.4s">
+					<div class="section-heading">HTML5：语义化与新特性</div>
+					<p>HTML5 最显著的变化是引入了大量语义化标签，如 <code>&lt;header&gt;</code>、<code>&lt;footer&gt;</code>、<code>&lt;article&gt;</code> 和 <code>&lt;section&gt;</code> 等。这些标签不仅让代码更具可读性，也有利于搜索引擎优化（SEO）和屏幕阅读器解析。此外，HTML5 还提供了原生的音频（Audio）和视频（Video）支持，彻底摆脱了对 Flash 等插件的依赖，并新增了 Canvas 绘图、地理定位（Geolocation）、本地存储（LocalStorage）等强大的 Web API。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.5s">
+					<div class="section-heading">CSS3：布局革命与视觉增强</div>
+					<p>CSS3 在布局方面带来了革命性的突破。Flexbox（弹性盒子）和 Grid（网格）布局的出现，使得复杂页面的排版变得简单而直观，彻底解决了传统浮动布局（Float）的诸多痛点。在视觉表现上，CSS3 引入了圆角（Border-radius）、阴影（Box-shadow）、渐变（Gradient）等属性，以及强大的过渡（Transition）和动画（Animation）功能，让网页无需依赖图片和 JavaScript 也能实现炫酷的动态效果。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.6s">
+					<div class="section-heading">响应式设计：适配多端设备</div>
+					<p>随着移动互联网的普及，网页需要同时适配 PC、平板和手机等多种设备。CSS3 的媒体查询（Media Queries）是实现响应式设计（Responsive Design）的核心技术。通过媒体查询，我们可以根据设备的屏幕宽度、分辨率等特性，动态应用不同的样式规则，确保网页在任何设备上都能呈现出最佳的布局和视觉效果。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.7s">
+					<div class="section-heading">未来展望与最佳实践</div>
+					<p>虽然前端技术日新月异，Vue、React 等框架层出不穷，但 HTML5 和 CSS3 始终是底层基础。在实际开发中，我们应遵循“渐进增强”和“优雅降级”的原则，合理使用新特性，同时兼顾旧版本浏览器的兼容性。深入理解盒模型、BFC、层叠上下文等核心概念，将有助于我们编写出更加健壮和高效的代码。</p>
+				</div>
+
+				<div class="highlight-box wow fadeInUp" data-wow-delay="0.8s" style="border-left-color: #333; background: #f5f5f5;">
+					<p style="margin:0;"><strong>总结：</strong> HTML5 赋予了网页“意义”，CSS3 赋予了网页“美感”。两者相辅相成，共同构建了丰富多彩的 Web 世界。夯实基础，方能行稳致远。</p>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+	</body>
+</html>

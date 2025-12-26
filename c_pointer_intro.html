@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<title>C语言指针与内存管理</title>
+		<link rel="shortcut icon" href="./img/dto.ico"/>
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #333;
+				font-family: "Microsoft YaHei", sans-serif;
+				padding: 0;
+				margin: 0;
+				overflow-x: hidden;
+			}
+
+			/* Back Button */
+			.back-btn-container {
+				position: fixed;
+				top: 30px;
+				left: 30px;
+				z-index: 1000;
+			}
+			.btn-back {
+				display: inline-block;
+				padding: 10px 25px;
+				background-color: #fff;
+				color: #40d2b1;
+				border: 2px solid #40d2b1;
+				border-radius: 30px;
+				font-weight: bold;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px rgba(64, 210, 177, 0.2);
+			}
+			.btn-back:hover {
+				background-color: #40d2b1;
+				color: #fff;
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(64, 210, 177, 0.3);
+				text-decoration: none;
+			}
+			.btn-back i {
+				margin-right: 5px;
+			}
+
+			/* Content Container */
+			.content-wrapper {
+				max-width: 900px;
+				margin: 80px auto 100px;
+				padding: 40px;
+				position: relative;
+			}
+			
+			/* Decorative Elements */
+			.bg-decoration {
+				position: fixed;
+				top: 0;
+				right: 0;
+				width: 300px;
+				height: 300px;
+				background: linear-gradient(135deg, rgba(64, 210, 177, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+				border-radius: 0 0 0 100%;
+				z-index: -1;
+			}
+			.bg-decoration-2 {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle at bottom left, rgba(64, 210, 177, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+				z-index: -1;
+			}
+
+			/* Typography */
+			.main-title {
+				font-size: 42px;
+				font-weight: 800;
+				margin-bottom: 50px;
+				color: #2c3e50;
+				position: relative;
+				display: inline-block;
+			}
+			.main-title::after {
+				content: '';
+				position: absolute;
+				bottom: -15px;
+				left: 0;
+				width: 60px;
+				height: 4px;
+				background: #40d2b1;
+				border-radius: 2px;
+			}
+			
+			.article-section {
+				margin-bottom: 30px;
+				line-height: 2;
+				font-size: 18px;
+				color: #555;
+				text-align: justify;
+			}
+			
+			.highlight-box {
+				background: #f9fbfd;
+				border-left: 5px solid #40d2b1;
+				padding: 25px;
+				margin: 40px 0;
+				border-radius: 0 8px 8px 0;
+				font-size: 18px;
+				color: #444;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+			}
+
+			.section-heading {
+				font-size: 24px;
+				font-weight: bold;
+				color: #333;
+				margin-top: 40px;
+				margin-bottom: 20px;
+				display: flex;
+				align-items: center;
+			}
+			.section-heading::before {
+				content: '';
+				display: inline-block;
+				width: 8px;
+				height: 24px;
+				background-color: #40d2b1;
+				margin-right: 15px;
+				border-radius: 4px;
+			}
+
+			/* Animations */
+			.wow {
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Background Elements -->
+		<div class="bg-decoration"></div>
+		<div class="bg-decoration-2"></div>
+
+		<!-- Back Button -->
+		<div class="back-btn-container wow fadeInDown" data-wow-delay="0.2s">
+			<a href="c_lang.html" class="btn-back">
+				<span class="glyphicon glyphicon-arrow-left"></span> 返回列表
+			</a>
+		</div>
+
+		<div class="container">
+			<div class="content-wrapper">
+				<h1 class="main-title wow fadeInLeft">C语言指针与内存管理</h1>
+				
+				<div class="article-section wow fadeInUp" data-wow-delay="0.2s">
+					<p>指针（Pointer）是 C 语言最核心、最强大的特性之一，也是初学者最容易感到困惑的概念。从本质上讲，指针是一个变量，其存储的是另一个变量的内存地址。通过指针，程序员可以直接访问和操作计算机的内存，这使得 C 语言在系统编程、嵌入式开发和高性能计算领域具有不可替代的地位。</p>
+				</div>
+
+				<div class="highlight-box wow fadeInUp" data-wow-delay="0.3s">
+					<strong>核心观点：</strong> 指针不仅是地址的抽象，更是 C 语言实现复杂数据结构（如链表、树）、函数回调和动态内存管理的基础工具。
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.4s">
+					<div class="section-heading">指针的基础与算术运算</div>
+					<p>理解指针的关键在于区分“指针的值”（即地址）和“指针所指向的值”（即该地址存储的数据）。通过解引用操作符（*），我们可以读取或修改指针指向的内存内容。此外，C 语言支持指针的算术运算，例如指针加一并不是简单地增加一个字节，而是根据指针指向的数据类型大小，跳跃到下一个元素的地址。这一特性在数组遍历和字符串处理中极为高效。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.5s">
+					<div class="section-heading">动态内存分配：malloc 与 free</div>
+					<p>在栈（Stack）上分配的内存由编译器自动管理，生命周期有限。而在实际应用中，我们往往需要在程序运行时根据需求动态申请内存，这就涉及到堆（Heap）的操作。标准库函数 <code>malloc</code> 用于申请指定大小的连续内存块，<code>free</code> 用于释放不再使用的内存。正确管理堆内存是防止内存泄漏（Memory Leak）的关键，每一对 <code>malloc</code> 和 <code>free</code> 都应严格匹配。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.6s">
+					<div class="section-heading">指针与数组、字符串的紧密关系</div>
+					<p>在 C 语言中，数组名在大多数表达式中会退化为指向数组首元素的指针。这种设计使得数组和指针在很多场景下可以互换使用，但也容易混淆。字符串在 C 语言中本质上是以空字符 <code>\0</code> 结尾的字符数组，通过指针操作字符串（如 <code>char *str</code>）比使用数组下标更为灵活，是 C 语言处理文本的标准方式。</p>
+				</div>
+
+				<div class="article-section wow fadeInUp" data-wow-delay="0.7s">
+					<div class="section-heading">多级指针与函数指针</div>
+					<p>指针的指针（二级指针）常用于修改指针本身的指向，或者处理指针数组（如字符串数组）。函数指针则允许我们将函数作为参数传递给其他函数，或者存储在数组中，这是实现回调函数、状态机以及模拟面向对象多态性的基础技术。</p>
+				</div>
+				
+				<div class="article-section wow fadeInUp" data-wow-delay="0.8s">
+					<div class="section-heading">常见陷阱与安全实践</div>
+					<p>指针虽然强大，但也充满风险。空指针解引用、野指针（悬垂指针）、缓冲区溢出等错误常常导致程序崩溃甚至安全漏洞。现代 C 编程建议初始化指针为 <code>NULL</code>，释放内存后立即将指针置空，并尽量使用静态分析工具来检测潜在的内存问题。严谨的编码习惯是驾驭指针的必修课。</p>
+				</div>
+
+				<div class="highlight-box wow fadeInUp" data-wow-delay="0.9s" style="border-left-color: #333; background: #f5f5f5;">
+					<p style="margin:0;"><strong>总结：</strong> 掌握指针与内存管理，意味着你真正跨入了 C 语言的大门。它不仅赋予了你对硬件的掌控力，更锻炼了你对计算机底层逻辑的深刻理解。尽管学习曲线陡峭，但这份投入将为你的编程生涯带来长远的回报。</p>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+	</body>
+</html>
