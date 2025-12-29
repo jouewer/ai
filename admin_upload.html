@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>照片上传 - 旅行日记</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f4f7f6;
+            padding: 20px;
+        }
+        .upload-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 30px auto;
+        }
+        .page-header {
+            margin-top: 0;
+            border-bottom-color: #eee;
+        }
+        .preview-area {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        .preview-img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .btn-logout {
+            float: right;
+            margin-top: -10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upload-card">
+            <div class="page-header">
+                <button class="btn btn-default btn-sm btn-logout" id="logoutBtn">退出登录</button>
+                <h3>上传新照片</h3>
+            </div>
+            
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label>选择分类</label>
+                    <select class="form-control" id="category" required>
+                        <option value="">-- 请选择 --</option>
+                        <option value="cc">CC 之旅 (长春)</option>
+                        <option value="ns">NS 记忆 (南沙)</option>
+                        <option value="yn">YN 时光 (云南)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>展示位置</label>
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="displayLocation" value="travel_gallery" checked> 仅旅行日记
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="displayLocation" value="map_album"> 仅地图相册
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="displayLocation" value="both"> 两者都展示
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>图片描述</label>
+                    <input type="text" class="form-control" id="caption" placeholder="例如：美丽的风景" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>选择图片</label>
+                    <input type="file" class="form-control" id="fileInput" accept="image/*" required>
+                </div>
+                
+                <div class="preview-area" id="previewArea">
+                    <p class="text-muted">预览：</p>
+                    <img src="" class="preview-img" id="previewImg">
+                </div>
+                
+                <hr>
+                <button type="submit" class="btn btn-success btn-block btn-lg">确认上传</button>
+                <a href="travel_gallery.html" class="btn btn-link btn-block">返回相册查看</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        // Check Auth
+        if(localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        // Logout
+        $('#logoutBtn').click(function() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'travel_gallery.html';
+        });
+
+        // Preview
+        $('#fileInput').change(function() {
+            var file = this.files[0];
+            if(file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewImg').attr('src', e.target.result);
+                    $('#previewArea').slideDown();
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Submit
+        $('#uploadForm').submit(function(e) {
+            e.preventDefault();
+            
+            var category = $('#category').val();
+            var displayLocation = $('input[name="displayLocation"]:checked').val();
+            var caption = $('#caption').val();
+            var file = $('#fileInput')[0].files[0];
+            
+            if(!file) return;
+
+            // Size check (optional, but good for localStorage limits)
+            if(file.size > 2 * 1024 * 1024) { // 2MB limit warning
+                if(!confirm('图片较大 (' + (file.size/1024/1024).toFixed(2) + 'MB)，可能会占用较多本地存储空间。是否继续？')) {
+                    return;
+                }
+            }
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var base64Data = e.target.result;
+                
+                var newImage = {
+                    id: Date.now(),
+                    category: category,
+                    displayLocation: displayLocation,
+                    caption: caption,
+                    src: base64Data,
+                    date: new Date().toLocaleDateString()
+                };
+                
+                var images = JSON.parse(localStorage.getItem('galleryImages') || '[]');
+                images.push(newImage);
+                localStorage.setItem('galleryImages', JSON.stringify(images));
+                
+                alert('上传成功！');
+                // Reset form
+                $('#uploadForm')[0].reset();
+                $('#previewArea').hide();
+                // Restore default radio selection
+                $('input[name="displayLocation"][value="travel_gallery"]').prop('checked', true);
+            }
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>

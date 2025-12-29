@@ -256,7 +256,7 @@
 					<h2 class="category-title wow fadeInDown">CC 之旅</h2>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="gallery-cc">
 				<!-- CC1 - CC6 -->
 				<div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="photo-card">
@@ -302,7 +302,7 @@
 					<h2 class="category-title wow fadeInDown">NS 记忆</h2>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="gallery-ns">
 				<!-- NS1 - NS8 -->
 				<div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="photo-card">
@@ -360,7 +360,7 @@
 					<h2 class="category-title wow fadeInDown">YN 时光</h2>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="gallery-yn">
 				<!-- YN1 - YN8 -->
 				<div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
 					<div class="photo-card">
@@ -418,7 +418,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p>&copy; 2024 李琼渊的旅行日记. All Rights Reserved.</p>
+						<p>&copy; 2024 <a href="login.html" style="color: #fff; text-decoration: none;">李琼渊的旅行日记</a>. All Rights Reserved.</p>
 					</div>
 				</div>
 			</div>
@@ -448,8 +448,44 @@
 					pause: "hover"
 				});
 
-				// Image Click Handler for Lightbox
-				$('.photo-card img').click(function(){
+				// Load Custom Uploaded Images from LocalStorage
+				var customImages = JSON.parse(localStorage.getItem('galleryImages') || '[]');
+				customImages.forEach(function(img) {
+                    // Check if image should be displayed in travel gallery
+                    // Default to true if displayLocation is undefined (backward compatibility)
+                    if (img.displayLocation && img.displayLocation !== 'travel_gallery' && img.displayLocation !== 'both') {
+                        return;
+                    }
+
+					var containerId = '';
+					var colClass = '';
+					
+					if(img.category === 'cc') {
+						containerId = '#gallery-cc';
+						colClass = 'col-md-4 col-sm-6';
+					} else if(img.category === 'ns') {
+						containerId = '#gallery-ns';
+						colClass = 'col-md-3 col-sm-6';
+					} else if(img.category === 'yn') {
+						containerId = '#gallery-yn';
+						colClass = 'col-md-3 col-sm-6';
+					}
+					
+					if(containerId) {
+						var html = `
+							<div class="${colClass} wow fadeInUp" data-wow-delay="0.1s">
+								<div class="photo-card">
+									<img src="${img.src}" alt="${img.caption}">
+									<div class="photo-caption">${img.caption}</div>
+								</div>
+							</div>
+						`;
+						$(containerId).append(html);
+					}
+				});
+
+				// Image Click Handler for Lightbox (Delegate for dynamic elements)
+				$(document).on('click', '.photo-card img', function(){
 					var imgSrc = $(this).attr('src');
 					$('#previewImage').attr('src', imgSrc);
 					$('#imageModal').modal('show');

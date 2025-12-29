@@ -202,14 +202,26 @@
             { name: '云南弥勒', coord: [103.43, 24.41], code: 'yn', count: 8, ext: 'jpg' }
         ];
 
+        // Helper: Get custom images from localStorage for map_album
+        function getCustomImages(code) {
+            const allImages = JSON.parse(localStorage.getItem('galleryImages') || '[]');
+            return allImages.filter(img => 
+                img.category === code && 
+                (img.displayLocation === 'map_album' || img.displayLocation === 'both')
+            );
+        }
+
         // Render Stats Panel
         const statsList = document.getElementById('stats-list');
         locations.forEach(loc => {
+            const customImgs = getCustomImages(loc.code);
+            const totalCount = loc.count + customImgs.length;
+
             const li = document.createElement('li');
             li.className = 'stats-item';
             li.innerHTML = `
                 <span class="stats-name">${loc.name}</span>
-                <span class="stats-count">${loc.count} 张</span>
+                <span class="stats-count">${totalCount} 张</span>
             `;
             // Add click event to trigger the same action as clicking the map marker
             li.addEventListener('click', () => showAlbum(loc));
@@ -360,6 +372,7 @@
                 videoArea.html(videoHtml);
             }
             
+            // Static Images
             for(let i = 1; i <= locData.count; i++) {
                 const imgPath = `travel/${locData.code}${i}.${locData.ext}`;
                 const img = $('<img>')
@@ -368,6 +381,17 @@
                     .on('click', () => showLightbox(imgPath));
                 grid.append(img);
             }
+            
+            // Custom Uploaded Images
+            const customImgs = getCustomImages(locData.code);
+            customImgs.forEach(imgData => {
+                const img = $('<img>')
+                    .addClass('thumb-item')
+                    .attr('src', imgData.src)
+                    .attr('title', imgData.caption)
+                    .on('click', () => showLightbox(imgData.src));
+                grid.append(img);
+            });
             
             $('#albumModal').modal('show');
         }
