@@ -193,7 +193,6 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
     <script>
         // Data Configuration
         const locations = [
@@ -218,126 +217,137 @@
 
         // Init Map
         const chart = echarts.init(document.getElementById('map-container'));
-        
-        const option = {
-            backgroundColor: '#0b1221',
-            title: {
-                text: '中国全样貌地图相册',
-                subtext: '点击地图上的亮点查看照片',
-                left: 'center',
-                top: 20,
-                textStyle: {
-                    color: '#fff',
-                    fontSize: 24
-                },
-                subtextStyle: {
-                    color: '#aaa',
-                    fontSize: 14
-                }
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{b}'
-            },
-            geo: {
-                map: 'china',
-                roam: true,
-                zoom: 1.2,
-                label: { emphasis: { show: false } },
-                itemStyle: {
-                    normal: {
-                        areaColor: '#102644',
-                        borderColor: '#2ab8ff',
-                        borderWidth: 1,
-                        shadowColor: 'rgba(0,54,255, 0.4)',
-                        shadowBlur: 10
+        chart.showLoading({ text: '地图加载中...', color: '#00d2ff', textColor: '#fff', maskColor: 'rgba(11, 18, 33, 0.8)' });
+
+        // Load China Map Data from Aliyun DataV
+        $.getJSON('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function(chinaJson) {
+            chart.hideLoading();
+            echarts.registerMap('china', chinaJson);
+            
+            const option = {
+                backgroundColor: '#0b1221',
+                title: {
+                    text: '中国全样貌地图相册',
+                    subtext: '点击地图上的亮点查看照片',
+                    left: 'center',
+                    top: 20,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 24
                     },
-                    emphasis: {
-                        areaColor: '#084882',
-                        shadowBlur: 20
+                    subtextStyle: {
+                        color: '#aaa',
+                        fontSize: 14
                     }
-                }
-            },
-            series: [
-                {
-                    name: '地点',
-                    type: 'effectScatter',
-                    coordinateSystem: 'geo',
-                    data: locations.map(loc => ({
-                        name: loc.name,
-                        value: [...loc.coord, loc] // Pass entire loc object as data
-                    })),
-                    symbolSize: 15,
-                    showEffectOn: 'render',
-                    rippleEffect: {
-                        brushType: 'stroke',
-                        scale: 4,
-                        period: 4
-                    },
-                    hoverAnimation: true,
-                    label: {
-                        normal: {
-                            formatter: '{b}',
-                            position: 'right',
-                            show: true,
-                            color: '#fff',
-                            fontSize: 14,
-                            backgroundColor: 'rgba(0,0,0,0.5)',
-                            padding: [4, 8],
-                            borderRadius: 4,
-                            distance: 10
-                        }
-                    },
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}'
+                },
+                geo: {
+                    map: 'china',
+                    roam: true,
+                    zoom: 1.2,
+                    label: { emphasis: { show: false } },
                     itemStyle: {
                         normal: {
-                            color: '#f4e925',
-                            shadowBlur: 10,
-                            shadowColor: '#333'
+                            areaColor: '#102644',
+                            borderColor: '#2ab8ff',
+                            borderWidth: 1,
+                            shadowColor: 'rgba(0,54,255, 0.4)',
+                            shadowBlur: 10
+                        },
+                        emphasis: {
+                            areaColor: '#084882',
+                            shadowBlur: 20
                         }
-                    },
-                    zlevel: 1
-                }
-            ]
-        };
+                    }
+                },
+                series: [
+                    {
+                        name: '地点',
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        data: locations.map(loc => ({
+                            name: loc.name,
+                            value: [...loc.coord, loc] // Pass entire loc object as data
+                        })),
+                        symbolSize: 15,
+                        showEffectOn: 'render',
+                        rippleEffect: {
+                            brushType: 'stroke',
+                            scale: 4,
+                            period: 4
+                        },
+                        hoverAnimation: true,
+                        label: {
+                            normal: {
+                                formatter: '{b}',
+                                position: 'right',
+                                show: true,
+                                color: '#fff',
+                                fontSize: 14,
+                                backgroundColor: 'rgba(0,0,0,0.5)',
+                                padding: [4, 8],
+                                borderRadius: 4,
+                                distance: 10
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#f4e925',
+                                shadowBlur: 10,
+                                shadowColor: '#333'
+                            }
+                        },
+                        zlevel: 1
+                    }
+                ]
+            };
 
-        chart.setOption(option);
+            chart.setOption(option);
+
+            // Map Control Logic
+            $('#btn-zoom-in').on('click', function() {
+                chart.setOption({
+                    geo: {
+                        zoom: chart.getOption().geo[0].zoom * 1.2
+                    }
+                });
+            });
+
+            $('#btn-zoom-out').on('click', function() {
+                chart.setOption({
+                    geo: {
+                        zoom: chart.getOption().geo[0].zoom * 0.8
+                    }
+                });
+            });
+
+            $('#btn-reset').on('click', function() {
+                chart.setOption({
+                    geo: {
+                        zoom: 1.2,
+                        center: null // Reset to default center
+                    }
+                });
+            });
+
+            // Click Event
+            chart.on('click', function(params) {
+                if (params.componentType === 'series') {
+                    const data = params.data.value[2]; // Get the loc object
+                    showAlbum(data);
+                }
+            });
+
+        }).fail(function() {
+            chart.hideLoading();
+            alert('地图数据加载失败，请检查网络连接！');
+        });
         
         // Resize handler
         window.addEventListener('resize', () => chart.resize());
-
-        // Map Control Logic
-        $('#btn-zoom-in').on('click', function() {
-            chart.setOption({
-                geo: {
-                    zoom: chart.getOption().geo[0].zoom * 1.2
-                }
-            });
-        });
-
-        $('#btn-zoom-out').on('click', function() {
-            chart.setOption({
-                geo: {
-                    zoom: chart.getOption().geo[0].zoom * 0.8
-                }
-            });
-        });
-
-        $('#btn-reset').on('click', function() {
-            chart.setOption({
-                geo: {
-                    zoom: 1.2,
-                    center: null // Reset to default center
-                }
-            });
-        });
-
-        // Click Event
-        chart.on('click', function(params) {
-            if (params.componentType === 'series') {
-                const data = params.data.value[2]; // Get the loc object
-                showAlbum(data);
-            }
-        });
 
         // Album Logic
         function showAlbum(locData) {
