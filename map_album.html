@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>中国全样貌地图相册</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <style>
+        body { margin: 0; padding: 0; background: #0b1221; overflow: hidden; font-family: "Microsoft YaHei", sans-serif; }
+        #map-container { width: 100vw; height: 100vh; }
+        .back-btn {
+            position: absolute; top: 20px; left: 20px; z-index: 999;
+            color: #00d2ff; border: 1px solid #00d2ff; padding: 8px 20px;
+            border-radius: 20px; text-decoration: none; background: rgba(0,0,0,0.5);
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        .back-btn:hover { background: #00d2ff; color: #fff; text-decoration: none; }
+        
+        /* Modal Customization */
+        .modal-content { background: rgba(16, 30, 50, 0.95); border: 1px solid #005a7d; color: #fff; box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); }
+        .modal-header { border-bottom: 1px solid #005a7d; }
+        .close { color: #fff; opacity: 0.8; text-shadow: none; }
+        .close:hover { opacity: 1; color: #00d2ff; }
+        
+        /* Thumbnail Grid */
+        .thumb-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; padding: 10px; }
+        .thumb-item { 
+            width: 120px; height: 120px; object-fit: cover; 
+            border: 2px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.3s;
+            border-radius: 4px;
+        }
+        .thumb-item:hover { border-color: #00d2ff; transform: scale(1.05); box-shadow: 0 0 15px rgba(0,210,255,0.5); }
+
+        /* Lightbox Overlay */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 10000; display: none;
+            align-items: center; justify-content: center;
+        }
+        #lightbox img { max-width: 90%; max-height: 90%; box-shadow: 0 0 20px rgba(0,210,255,0.3); border-radius: 4px; }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; transition: color 0.3s;
+        }
+        .lightbox-close:hover { color: #00d2ff; }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #005a7d;
+            background: #000;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+            max-height: 400px;
+        }
+
+        /* Stats Panel */
+        .stats-panel {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            width: 250px;
+            background: rgba(16, 30, 50, 0.8);
+            border: 1px solid #005a7d;
+            border-radius: 8px;
+            padding: 15px;
+            z-index: 99;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        .stats-panel h3 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            color: #00d2ff;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .stats-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .stats-item:hover {
+            background: rgba(0, 210, 255, 0.1);
+        }
+        .stats-item:last-child {
+            border-bottom: none;
+        }
+        .stats-name {
+            color: #ddd;
+        }
+        .stats-count {
+            color: #f4e925;
+            font-weight: bold;
+        }
+
+        /* Map Controls */
+        .map-controls {
+            position: absolute;
+            right: 20px;
+            bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 99;
+        }
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(16, 30, 50, 0.8);
+            border: 1px solid #005a7d;
+            border-radius: 4px;
+            color: #00d2ff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            outline: none;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .control-btn:hover {
+            background: #00d2ff;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0,210,255,0.5);
+        }
+    </style>
+</head>
+<body>
+    <a href="about.html" class="back-btn"><span class="glyphicon glyphicon-arrow-left"></span> 返回作者简介</a>
+    
+    <!-- Stats Panel -->
+    <div class="stats-panel">
+        <h3>相册统计</h3>
+        <ul class="stats-list" id="stats-list">
+            <!-- Stats injected here -->
+        </ul>
+    </div>
+
+    <!-- Map Controls -->
+    <div class="map-controls">
+        <button class="control-btn" id="btn-zoom-in" title="放大"><span class="glyphicon glyphicon-plus"></span></button>
+        <button class="control-btn" id="btn-zoom-out" title="缩小"><span class="glyphicon glyphicon-minus"></span></button>
+        <button class="control-btn" id="btn-reset" title="还原"><span class="glyphicon glyphicon-refresh"></span></button>
+    </div>
+
+    <div id="map-container"></div>
+
+    <!-- Album Modal -->
+    <div class="modal fade" id="albumModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="albumTitle">地点相册</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="videoArea"></div>
+                    <div class="thumb-grid" id="albumGrid">
+                        <!-- Thumbnails injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Lightbox -->
+    <div id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Preview">
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+    <script>
+        // Data Configuration
+        const locations = [
+            { name: '吉林长春', coord: [125.32, 43.81], code: 'cc', count: 6, ext: 'jpg', video: 'travel/cc.mp4' },
+            { name: '广东广州南沙区', coord: [113.53, 22.80], code: 'ns', count: 8, ext: 'jpg' },
+            { name: '云南弥勒', coord: [103.43, 24.41], code: 'yn', count: 8, ext: 'jpg' }
+        ];
+
+        // Render Stats Panel
+        const statsList = document.getElementById('stats-list');
+        locations.forEach(loc => {
+            const li = document.createElement('li');
+            li.className = 'stats-item';
+            li.innerHTML = `
+                <span class="stats-name">${loc.name}</span>
+                <span class="stats-count">${loc.count} 张</span>
+            `;
+            // Add click event to trigger the same action as clicking the map marker
+            li.addEventListener('click', () => showAlbum(loc));
+            statsList.appendChild(li);
+        });
+
+        // Init Map
+        const chart = echarts.init(document.getElementById('map-container'));
+        
+        const option = {
+            backgroundColor: '#0b1221',
+            title: {
+                text: '中国全样貌地图相册',
+                subtext: '点击地图上的亮点查看照片',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 24
+                },
+                subtextStyle: {
+                    color: '#aaa',
+                    fontSize: 14
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}'
+            },
+            geo: {
+                map: 'china',
+                roam: true,
+                zoom: 1.2,
+                label: { emphasis: { show: false } },
+                itemStyle: {
+                    normal: {
+                        areaColor: '#102644',
+                        borderColor: '#2ab8ff',
+                        borderWidth: 1,
+                        shadowColor: 'rgba(0,54,255, 0.4)',
+                        shadowBlur: 10
+                    },
+                    emphasis: {
+                        areaColor: '#084882',
+                        shadowBlur: 20
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '地点',
+                    type: 'effectScatter',
+                    coordinateSystem: 'geo',
+                    data: locations.map(loc => ({
+                        name: loc.name,
+                        value: [...loc.coord, loc] // Pass entire loc object as data
+                    })),
+                    symbolSize: 15,
+                    showEffectOn: 'render',
+                    rippleEffect: {
+                        brushType: 'stroke',
+                        scale: 4,
+                        period: 4
+                    },
+                    hoverAnimation: true,
+                    label: {
+                        normal: {
+                            formatter: '{b}',
+                            position: 'right',
+                            show: true,
+                            color: '#fff',
+                            fontSize: 14,
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                            padding: [4, 8],
+                            borderRadius: 4,
+                            distance: 10
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#f4e925',
+                            shadowBlur: 10,
+                            shadowColor: '#333'
+                        }
+                    },
+                    zlevel: 1
+                }
+            ]
+        };
+
+        chart.setOption(option);
+        
+        // Resize handler
+        window.addEventListener('resize', () => chart.resize());
+
+        // Map Control Logic
+        $('#btn-zoom-in').on('click', function() {
+            chart.setOption({
+                geo: {
+                    zoom: chart.getOption().geo[0].zoom * 1.2
+                }
+            });
+        });
+
+        $('#btn-zoom-out').on('click', function() {
+            chart.setOption({
+                geo: {
+                    zoom: chart.getOption().geo[0].zoom * 0.8
+                }
+            });
+        });
+
+        $('#btn-reset').on('click', function() {
+            chart.setOption({
+                geo: {
+                    zoom: 1.2,
+                    center: null // Reset to default center
+                }
+            });
+        });
+
+        // Click Event
+        chart.on('click', function(params) {
+            if (params.componentType === 'series') {
+                const data = params.data.value[2]; // Get the loc object
+                showAlbum(data);
+            }
+        });
+
+        // Album Logic
+        function showAlbum(locData) {
+            $('#albumTitle').text(locData.name);
+            const grid = $('#albumGrid');
+            const videoArea = $('#videoArea');
+            
+            grid.empty();
+            videoArea.empty();
+
+            // Inject Video if exists
+            if (locData.video) {
+                const videoHtml = `
+                    <div class="video-container">
+                        <video controls>
+                            <source src="${locData.video}" type="video/mp4">
+                            您的浏览器不支持HTML5视频播放。
+                        </video>
+                    </div>`;
+                videoArea.html(videoHtml);
+            }
+            
+            for(let i = 1; i <= locData.count; i++) {
+                const imgPath = `travel/${locData.code}${i}.${locData.ext}`;
+                const img = $('<img>')
+                    .addClass('thumb-item')
+                    .attr('src', imgPath)
+                    .on('click', () => showLightbox(imgPath));
+                grid.append(img);
+            }
+            
+            $('#albumModal').modal('show');
+        }
+
+        // Stop video when modal closes
+        $('#albumModal').on('hidden.bs.modal', function () {
+            $('#videoArea').empty();
+        });
+
+        // Lightbox Logic
+        function showLightbox(src) {
+            $('#lightbox-img').attr('src', src);
+            $('#lightbox').fadeIn(200).css('display', 'flex');
+        }
+
+        $('.lightbox-close, #lightbox').on('click', function(e) {
+            if (e.target !== $('#lightbox-img')[0]) {
+                $('#lightbox').fadeOut(200);
+            }
+        });
+    </script>
+</body>
+</html>

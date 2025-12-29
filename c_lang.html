@@ -210,11 +210,18 @@
 		</footer>
 		<!--footer-->
 
-		<script src="js/jquery.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/wow.min.js"></script>
 		<script>
 			new WOW().init();
+			
+			$(function(){
+				/*小屏幕导航点击关闭菜单*/
+				$('.navbar-collapse a').click(function(){
+					$('.navbar-collapse').collapse('hide');
+				});
+			});
 		</script>
 	</body>
 </html>
